@@ -22,11 +22,12 @@ li {
 #task-to-add {
   display: flex;
   justify-content: space-between;
-  height: 33px;
+  height: 34px;
 }
 
 #todolist * {
   padding: 2%;
+  height: 34px;
 }
 
 #clear-list {
