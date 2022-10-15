@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import './style.css';
 
 const toDoList = [
@@ -21,21 +20,22 @@ const toDoList = [
 
 const getToDoList = () => {
   const list = toDoList;
-  let toDoes = '';
+  let tasks = '';
   for (let i = 0; i < list.length; i += 1) {
-    list.forEach((element) => {
-      if (element.index === i) {
-        toDoes += `
-          <li id = "${element.index}" class="item">
-            <input type="checkbox" name="task${element.index}" id="task${element.index}">
-            <label>${element.description}</label>
+    // eslint-disable-next-line no-loop-func
+    list.forEach((task) => {
+      if (task.index === i) {
+        tasks += `
+          <li id = "${task.index}" class="item">
+            <input type="checkbox" name="task${task.index}" id="task${task.index}">
+            <label>${task.description}</label>
           </li>
         `;
       }
     });
   }
 
-  return toDoes;
+  return tasks;
 };
 
 function component() {
