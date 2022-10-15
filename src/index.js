@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from 'lodash';
 import './style.css';
 
 const toDoList = [
@@ -20,26 +20,26 @@ const toDoList = [
 ];
 
 const getToDoList = () => {
-  let list = toDoList;
-  let tasks = '';
+  const list = toDoList;
+  let toDoes = '';
   for (let i = 0; i < list.length; i += 1) {
-    list.forEach(task => {
-      if (task.index === i) {
-        tasks += `
-          <li id = "${task.index}" class="item">
-            <input type="checkbox" name="task${task.index}" id="task${task.index}">
-            <label>${task.description}</label>
+    list.forEach((element) => {
+      if (element.index === i) {
+        toDoes += `
+          <li id = "${element.index}" class="item">
+            <input type="checkbox" name="task${element.index}" id="task${element.index}">
+            <label>${element.description}</label>
           </li>
         `;
       }
     });
   }
-  
-  return tasks;
+
+  return toDoes;
 };
 
-function component () {
-   const element = document.querySelector('#todolist');
+function component() {
+  const element = document.querySelector('#todolist');
 
   element.innerHTML = getToDoList();
 
