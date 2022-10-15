@@ -1,7 +1,79 @@
-.hello {
-  color: red;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background-color: bisque;
+  padding-top: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  width: 50%;
+  min-width: 300px;
+}
+
+#task-to-add {
+  display: flex;
+  justify-content: space-between;
+  height: 33px;
+}
+
+#todolist * {
+  padding: 2%;
+}
+
+#clear-list {
+  border: 1px solid #e3e3e3;
+  background-color: #e3e3e3;
+  color: #363636;
+  padding: 3%;
+  width: -webkit-fill-available;
+}
+
+.bordered {
+  border: 1px solid #e3e3e3;
+}
+
+.borderless {
+  border: none;
+}
+
+.list-head {
+  padding: 2%;
+}
+
+.item {
+  border: 1px solid #e3e3e3;
+  padding: 2%;
+}
+
+.fit {
+  width: -webkit-fill-available;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.p-2 {
+  padding: 2%;
+}
+
+.px-10 {
+  padding: 0 10px;
+}
+
+.flex {
+  display: flex;
 }
