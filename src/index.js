@@ -1,11 +1,49 @@
 import _ from "lodash";
+import './style.css';
+
+const toDoList = [
+  {
+    description: 'fix car',
+    completed: false,
+    index: 1,
+  },
+  {
+    description: 'wash the dishes',
+    completed: false,
+    index: 0,
+  },
+  {
+    description: 'complete To Do list project',
+    completed: false,
+    index: 2,
+  },
+];
+
+const getToDoList = () => {
+  let list = toDoList;
+  let tasks = '';
+  for (let i = 0; i < list.length; i += 1) {
+    list.forEach(task => {
+      if (task.index === i) {
+        tasks += `
+          <li id = "${task.index}" class="item">
+            <input type="checkbox" name="task${task.index}" id="task${task.index}">
+            <label>${task.description}</label>
+          </li>
+        `;
+      }
+    });
+  }
+  
+  return tasks;
+};
 
 function component () {
-  const element = document.createElement('div');
+   const element = document.querySelector('#todolist');
 
-  element.innerHTML = _.join(['hello', 'webpack'], ' ');
+  element.innerHTML = getToDoList();
 
   return element;
 }
 
-document.body.appendChild(component());
+document.querySelector('#todolist').appendChild(component());
