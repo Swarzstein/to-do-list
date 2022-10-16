@@ -4,7 +4,7 @@
 }
 
 body {
-  padding-top: 10%;
+  padding: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +26,7 @@ li {
 }
 
 #todolist * {
-  padding: 2%;
+  padding: 5px;
   height: 34px;
 }
 
@@ -51,8 +51,29 @@ li {
 }
 
 .item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border: 1px solid #e3e3e3;
-  padding: 2%;
+}
+
+.item * {
+  display: flex;
+  align-items: center;
+}
+
+.delete-task {
+  float: right;
+}
+
+.item label {
+  gap: 5px;
+  width: 100%;
+}
+
+.item button {
+  padding: 0;
+  justify-content: center;
 }
 
 .fit {
@@ -77,4 +98,8 @@ li {
 
 .flex {
   display: flex;
+}
+
+.hidden {
+  display: none;
 }
