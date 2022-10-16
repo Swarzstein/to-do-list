@@ -25,6 +25,18 @@ li {
   height: 34px;
 }
 
+.item * {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #e3e3e3;
+}
+
 #todolist * {
   padding: 5px;
   height: 34px;
@@ -48,18 +60,6 @@ li {
 
 .list-head {
   padding: 2%;
-}
-
-.item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid #e3e3e3;
-}
-
-.item * {
-  display: flex;
-  align-items: center;
 }
 
 .delete-task {
