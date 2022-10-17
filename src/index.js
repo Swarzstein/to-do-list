@@ -2,12 +2,9 @@ import './style.css';
 import Task from '../modules/task.js';
 import { setCheckboxListener, checkCompleted } from '../modules/status.js';
 
-// onload();
 const newTaskInput = document.querySelector('#new-task');
 const element = document.querySelector('#todolist');
 let toDoList = [];
-
-// localStorage.setItem('to_do_list', JSON.stringify(toDoList));
 
 const getToDoList = () => {
   toDoList = JSON.parse(localStorage.getItem('to_do_list'));
