@@ -14,6 +14,7 @@ const getToDoList = () => {
   return toDoList;
 };
 
+// eslint-disable-next-line consistent-return
 const printList = () => {
   const list = getToDoList();
   let tasks = '';

@@ -39,15 +39,17 @@ const setCheckboxListener = () => {
 
 const checkCompleted = () => {
   const tasks = JSON.parse(localStorage.getItem('to_do_list'));
-  tasks.forEach((task) => {
-    if (task.completed === true) {
-      document.querySelector(`#task${task.index}`).classList.add('completed');
-      try {
-        document.getElementById(`chk${task.index}`).checked = true;
-      // eslint-disable-next-line no-empty
-      } catch (error) {}
-    }
-  });
+  if (tasks !== null) {
+    tasks.forEach((task) => {
+      if (task.completed === true) {
+        document.querySelector(`#task${task.index}`).classList.add('completed');
+        try {
+          document.getElementById(`chk${task.index}`).checked = true;
+        // eslint-disable-next-line no-empty
+        } catch (error) {}
+      }
+    });
+  }
 };
 
 export { setCheckboxListener, checkCompleted };
