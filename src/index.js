@@ -49,16 +49,18 @@ const printList = () => {
     const confirmEditTask = (e) => {
       const taskIndex = parseInt(e.target.parentNode.parentNode.id, 10);
       const newDescription = document.getElementById(`edit${taskIndex}`).value;
-      const taskElement = document.getElementById(`${taskIndex}`);
-      const task = new Task(newDescription, taskIndex);
-      task.Edit();
+      if (newDescription !== '') {
+        const taskElement = document.getElementById(`${taskIndex}`);
+        const task = new Task(newDescription, taskIndex);
+        task.Edit();
 
-      document.querySelector(`#edit${taskIndex}`).classList.add('hidden');
-      document.querySelector(`#task${taskIndex}`).classList.remove('hidden');
+        document.querySelector(`#edit${taskIndex}`).classList.add('hidden');
+        document.querySelector(`#task${taskIndex}`).classList.remove('hidden');
 
-      taskElement.querySelector('.edit-manager').classList.add('hidden');
-      taskElement.querySelector('.list-editor').classList.remove('hidden');
-      printList();
+        taskElement.querySelector('.edit-manager').classList.add('hidden');
+        taskElement.querySelector('.list-editor').classList.remove('hidden');
+        printList();
+      }
     };
 
     // Start editting
