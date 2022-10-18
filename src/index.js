@@ -17,11 +17,12 @@ const getToDoList = () => {
 const printList = () => {
   const list = getToDoList();
   let tasks = '';
-  for (let i = 1; i <= list.length; i += 1) {
-    // eslint-disable-next-line no-loop-func
-    list.forEach((task) => {
-      if (task.index === i) {
-        tasks += `
+  try {
+    for (let i = 1; i <= list.length; i += 1) {
+      // eslint-disable-next-line no-loop-func
+      list.forEach((task) => {
+        if (task.index === i) {
+          tasks += `
           <li id = "${task.index}" class="item">
             <label>
               <input class="checked" type="checkbox" name="chk${task.index}" id="chk${task.index}">
@@ -38,86 +39,89 @@ const printList = () => {
             </div>
           </li>
         `;
-      }
-    });
-  }
-
-  element.innerHTML = tasks;
-
-  const confirmEditTask = (e) => {
-    const taskIndex = parseInt(e.target.parentNode.parentNode.id, 10);
-    const newDescription = document.getElementById(`edit${taskIndex}`).value;
-    const taskElement = document.getElementById(`${taskIndex}`);
-    const task = new Task(newDescription, taskIndex);
-    task.Edit();
-
-    document.querySelector(`#edit${taskIndex}`).classList.add('hidden');
-    document.querySelector(`#task${taskIndex}`).classList.remove('hidden');
-
-    taskElement.querySelector('.edit-manager').classList.add('hidden');
-    taskElement.querySelector('.list-editor').classList.remove('hidden');
-    printList();
-  };
-
-  // Start editting
-  document.querySelectorAll('.edit-task').forEach((etb) => {
-    etb.addEventListener('click', (e) => {
-      const taskIndex = parseInt(e.target.parentNode.parentNode.id, 10);
-      document.getElementById(`edit${taskIndex}`).value = document.querySelector(`#task${taskIndex}`).innerHTML;
-      const taskElement = document.getElementById(`${taskIndex}`);
-      const editTask = document.querySelector(`#edit${taskIndex}`);
-      editTask.classList.remove('hidden');
-      document.querySelector(`#task${taskIndex}`).classList.add('hidden');
-
-      taskElement.querySelector('.edit-manager').classList.remove('hidden');
-      taskElement.querySelector('.list-editor').classList.add('hidden');
-
-      editTask.addEventListener('keypress', (e) => {
-        const keypressed = (editTask) ? e.keyCode : e.which;
-        if (keypressed === 13) {
-          if (editTask.value !== '') { confirmEditTask(e); }
         }
       });
-    });
-  });
+    }
 
-  // Confirm task edition
-  document.querySelectorAll('.edit-confirm').forEach((ec) => {
-    ec.addEventListener('click', confirmEditTask);
-  });
+    element.innerHTML = tasks;
 
-  // Cancel task etition
-  document.querySelectorAll('.edit-cancel').forEach((ec) => {
-    ec.addEventListener('click', (e) => {
+    const confirmEditTask = (e) => {
       const taskIndex = parseInt(e.target.parentNode.parentNode.id, 10);
+      const newDescription = document.getElementById(`edit${taskIndex}`).value;
       const taskElement = document.getElementById(`${taskIndex}`);
+      const task = new Task(newDescription, taskIndex);
+      task.Edit();
 
       document.querySelector(`#edit${taskIndex}`).classList.add('hidden');
       document.querySelector(`#task${taskIndex}`).classList.remove('hidden');
 
       taskElement.querySelector('.edit-manager').classList.add('hidden');
       taskElement.querySelector('.list-editor').classList.remove('hidden');
-
       printList();
-    });
-  });
+    };
 
-  // delete selected task
-  document.querySelectorAll('.delete-task').forEach((dtb) => {
-    dtb.addEventListener('click', (e) => {
-      const task = new Task();
-      const taskIndex = parseInt(e.target.parentNode.parentNode.id, 10);
-      task.Delete(taskIndex);
-      printList();
+    // Start editting
+    document.querySelectorAll('.edit-task').forEach((etb) => {
+      etb.addEventListener('click', (e) => {
+        const taskIndex = parseInt(e.target.parentNode.parentNode.id, 10);
+        document.getElementById(`edit${taskIndex}`).value = document.querySelector(`#task${taskIndex}`).innerHTML;
+        const taskElement = document.getElementById(`${taskIndex}`);
+        const editTask = document.querySelector(`#edit${taskIndex}`);
+        editTask.classList.remove('hidden');
+        document.querySelector(`#task${taskIndex}`).classList.add('hidden');
+
+        taskElement.querySelector('.edit-manager').classList.remove('hidden');
+        taskElement.querySelector('.list-editor').classList.add('hidden');
+
+        editTask.addEventListener('keypress', (e) => {
+          const keypressed = (editTask) ? e.keyCode : e.which;
+          if (keypressed === 13) {
+            if (editTask.value !== '') { confirmEditTask(e); }
+          }
+        });
+      });
     });
-  });
-  checkCompleted();
-  setCheckboxListener();
+
+    // Confirm task edition
+    document.querySelectorAll('.edit-confirm').forEach((ec) => {
+      ec.addEventListener('click', confirmEditTask);
+    });
+
+    // Cancel task etition
+    document.querySelectorAll('.edit-cancel').forEach((ec) => {
+      ec.addEventListener('click', (e) => {
+        const taskIndex = parseInt(e.target.parentNode.parentNode.id, 10);
+        const taskElement = document.getElementById(`${taskIndex}`);
+
+        document.querySelector(`#edit${taskIndex}`).classList.add('hidden');
+        document.querySelector(`#task${taskIndex}`).classList.remove('hidden');
+
+        taskElement.querySelector('.edit-manager').classList.add('hidden');
+        taskElement.querySelector('.list-editor').classList.remove('hidden');
+
+        printList();
+      });
+    });
+
+    // delete selected task
+    document.querySelectorAll('.delete-task').forEach((dtb) => {
+      dtb.addEventListener('click', (e) => {
+        const task = new Task();
+        const taskIndex = parseInt(e.target.parentNode.parentNode.id, 10);
+        task.Delete(taskIndex);
+        printList();
+      });
+    });
+    checkCompleted();
+    setCheckboxListener();
+  } catch (error) {
+    return null;
+  }
 };
 
-printList();
-
-// console.log(setCheckboxListener);
+if (getToDoList() !== []) {
+  printList();
+}
 
 const addNewTask = () => {
   toDoList = getToDoList();
@@ -126,7 +130,6 @@ const addNewTask = () => {
   task.Add();
   newTaskInput.value = '';
   printList();
-  // checkCompleted();
 };
 
 // Add new Task
