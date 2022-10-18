@@ -11,12 +11,14 @@ class Task {
     if (storage !== null) {
       tasks = storage;
     }
-    tasks.push({
-      description: this.description,
-      completed: this.completed,
-      index: this.index,
-    });
-    localStorage.setItem('to_do_list', JSON.stringify(tasks));
+    if (this.description !== '') {
+      tasks.push({
+        description: this.description,
+        completed: this.completed,
+        index: this.index,
+      });
+      localStorage.setItem('to_do_list', JSON.stringify(tasks));
+    }
   };
 
   Delete = (index) => {
@@ -36,13 +38,15 @@ class Task {
   };
 
   Edit = () => {
-    const tasks = JSON.parse(localStorage.getItem('to_do_list'));
-    tasks.forEach((task) => {
-      if (task.index === this.index) {
-        task.description = this.description;
-      }
-    });
-    localStorage.setItem('to_do_list', JSON.stringify(tasks));
+    if (this.description !== '') {
+      const tasks = JSON.parse(localStorage.getItem('to_do_list'));
+      tasks.forEach((task) => {
+        if (task.index === this.index) {
+          task.description = this.description;
+        }
+      });
+      localStorage.setItem('to_do_list', JSON.stringify(tasks));
+    }
   };
 }
 
