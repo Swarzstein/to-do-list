@@ -125,12 +125,14 @@ if (getToDoList() !== []) {
 }
 
 const addNewTask = () => {
-  toDoList = getToDoList();
-  const newIndex = toDoList.length + 1;
-  const task = new Task(newTaskInput.value, newIndex);
-  task.Add();
-  newTaskInput.value = '';
-  printList();
+  if (newTaskInput.value !== '') {
+    toDoList = getToDoList();
+    const newIndex = toDoList.length + 1;
+    const task = new Task(newTaskInput.value, newIndex);
+    task.Add();
+    newTaskInput.value = '';
+    printList();
+  }
 };
 
 // Add new Task
